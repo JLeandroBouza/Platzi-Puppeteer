@@ -12,20 +12,25 @@ describe ('Tiempos de espera',() =>{
     
     
     const page = await browser.newPage()
-    await page.goto('https://platzi.com' , {waitUntil: 'networkidle2' })
+    await page.goto('https://demoqa.com/modal-dialogs' , {waitUntil: 'networkidle2' })
 
 
     //Esoera explicita
 
-    await new Promise(r => setTimeout(r, 3000))
+   // await new Promise(r => setTimeout(r, 3000))
 
     //Espera por un selector CSS
 
-    await page.waitForSelector('body > main > header > div > figure > svg > g > path:nth-child(2)')
+   // await page.waitForSelector('body > main > header > div > figure > svg > g > path:nth-child(2)')
 
     //Espera por un xpath
 
-    await page.waitforxPath('body > main > header > div > figure > svg > g > path:nth-child(2)')
+   // await page.waitforxPath('body > main > header > div > figure > svg > g > path:nth-child(2)')
+
+    // Espera por funcion
+
+    await page.waitForFunction(() => document.querySelector('#example-modal-sizes-title-sm').innerText === 'Small Modal')
+
 
     await browser.close()
 
