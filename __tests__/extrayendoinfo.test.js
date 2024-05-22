@@ -6,7 +6,7 @@ describe ('Extrayendo información',() =>{
 
     let browser
     let page
-
+    //puede usarse beforeAll
     beforeEach(async () =>{
         browser = await puppeteer.launch({
             headless: false,
@@ -16,6 +16,7 @@ describe ('Extrayendo información',() =>{
         page = await browser.newPage()
     })
 
+    //afterAll
     afterEach(async() => {
         await browser.close()
     })
