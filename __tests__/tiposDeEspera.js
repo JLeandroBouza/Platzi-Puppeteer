@@ -30,6 +30,13 @@ describe ('Tiempos de espera',() =>{
     // Espera por funcion
 
     await page.waitForFunction(() => document.querySelector('#example-modal-sizes-title-sm').innerText === 'Small Modal')
+    
+    //tipos de timeout:
+
+    //1. colocarlo en el parentesis del It ('', async ()=> {    },3500)
+    //2. jest.setTimeout(35000);
+    //3. page.setDefaultTimeout(10000)
+    //4. colocar como atributo en una funcion: timeout
 
 
     await browser.close()

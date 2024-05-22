@@ -4,11 +4,24 @@ jest.setTimeout(35000);
 
 describe ('Extrayendo información',() =>{
 
-    it('Extraer el titulo', async () =>{
-        const browser = await puppeteer.launch({
+    let browser
+    let page
+
+    beforeEach(async () =>{
+        browser = await puppeteer.launch({
             headless: false,
             defaultViewport: null,
         })
+
+        page = await browser.newPage()
+    })
+
+    afterEach(async() => {
+        await browser.close()
+    })
+
+    it('Extraer el titulo', async () =>{
+        
 
     const page = await browser.newPage()
     await page.goto('https://platzi.com' , {waitUntil: 'networkidle0' })
@@ -42,7 +55,7 @@ describe ('Extrayendo información',() =>{
     const images = await page.$$eval('img', ()=> imagenes.length)
     console.log('images',images)
 
-    await browser.close()
+    
 
 })
 })
