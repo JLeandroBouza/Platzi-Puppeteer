@@ -1,6 +1,6 @@
 const { Dialog } = require('puppeteer');
 const puppeteer = require('puppeteer');
-jest.setTimeout(35000);
+//jest.setTimeout(35000);
 
 describe ('Extrayendo información',() =>{
 
@@ -14,7 +14,8 @@ describe ('Extrayendo información',() =>{
         })
 
         page = await browser.newPage()
-    })
+        await page.goto('http://platzi.com', {waitUntil: 'networkidle0'})
+    },3500)
 
     //afterAll
     afterEach(async() => {
