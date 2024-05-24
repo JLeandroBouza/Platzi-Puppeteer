@@ -1,9 +1,12 @@
 const { Dialog } = require('puppeteer');
 const puppeteer = require('puppeteer');
 const {getText,getCount} = require ('../Lib/helpers')
+const { toMatchImageSnapshot} = require ('jest-image-snapshot')
+expect.extend ({toMatchImageSnapshot})
+
 //jest.setTimeout(35000);
 
-describe ('Extrayendo información',() =>{
+describe ('Visual Testing',() =>{
 
     let browser
     let page
@@ -22,14 +25,37 @@ describe ('Extrayendo información',() =>{
         await browser.close()
     })
 
-    it('Snapshot', async () =>{
+    it('Snapshot de toda la página', async () =>{
 
-        await page.waitForSelector('body > main > header > div > button')
-        const nombreBoton = await getText(page,'body > main > header > div > button')
-    
-        console.log('nombreBoton', nombreBoton)
+        await page.waitForSelector('img')
 
-    
+        const screenshot = await page.screenshot()
 
-},50000)
+        expect(screenshot).toMatchImageSnapshot()
+
+    },50000)
+
+    it('Snapshot de solo un elemento', async () =>{
+
+        const image = await page.waitForSelector('img')
+
+        const screenshot = await page.screenshot()
+
+        expect(screenshot).toMatchImageSnapshot({
+            failureTreshold: 0.05,
+            failureThresholdType: 'percent'
+        })
+    },50000)
+
+    it('Snapshot de un dispositivo movil', async () =>{
+
+        const image = await page.waitForSelector('img')
+
+        const screenshot = await page.screenshot()
+
+        expect(screenshot).toMatchImageSnapshot({
+            failureTreshold: 0.05,
+            failureThresholdType: 'percent'
+        })
+    },50000)
 })
