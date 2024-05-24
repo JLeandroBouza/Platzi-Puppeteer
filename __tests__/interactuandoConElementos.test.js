@@ -1,5 +1,6 @@
 const { Dialog } = require('puppeteer');
 const puppeteer = require('puppeteer');
+const {click,doubleClick,type} = require ('../Lib/helpers')
 jest.setTimeout(35000);
 
 describe ('Interactuando con los elementos',() =>{

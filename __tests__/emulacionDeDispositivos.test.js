@@ -13,7 +13,9 @@ describe ('Extrayendo información',() =>{
             headless: false,
             defaultViewport: null,
         })
-
+        // para modo incognito es const  context= await browser.createIncognitoBrowserContext()
+        // page = await context.newPage()
+        //Para hacerlo en una sola linea page = await (await browser.createIncognitoBrowserContext()).newPage();
         page = await browser.newPage()
         await page.goto('http://platzi.com', {waitUntil: 'networkidle0'})
     },10000)

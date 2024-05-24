@@ -1,5 +1,6 @@
 const { Dialog } = require('puppeteer');
 const puppeteer = require('puppeteer');
+const {getText,getCount} = require ('../Lib/helpers')
 //jest.setTimeout(35000);
 
 describe ('Extrayendo información',() =>{
@@ -35,17 +36,17 @@ describe ('Extrayendo información',() =>{
     console.log('url',url)
 
     await page.waitForSelector('body > main > header > div > button')
-    const nombreBoton = await page.$eval('body > main > header > div > button', (button)=> button.textContent())
+    const nombreBoton = await getText(page,'body > main > header > div > button')
     
     console.log('nombreBoton', nombreBoton)
 
 // para extrar info con xpath
 
-    const [button] = await page.$x('/html/body/main/header/div/button')
-    const propiedad = await button.getProperty('textContent')
-    const texto = await propiedad.jsonValue()
+    //const [button] = await page.$x('/html/body/main/header/div/button')
+    //const propiedad = await button.getProperty('textContent')
+    //const texto = await propiedad.jsonValue()
+    //console.log ('texto', texto)
 
-    console.log ('texto', texto)
 
     // segunda forma para extraer con xpath
 
@@ -54,10 +55,10 @@ describe ('Extrayendo información',() =>{
 
 // contar elementos en la web
 
-    const images = await page.$$eval('img', ()=> imagenes.length)
+    const images = await getCount(page,'img')
     console.log('images',images)
 
     
 
-})
+},50000)
 })
